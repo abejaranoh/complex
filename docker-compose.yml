@@ -5,11 +5,12 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres_password
 
-  # redis 4 at he time      
+  #redis 4 at he time      
   redis:
     image: 'redis:4'
-
-  server:
+    
+  #server
+  api:
     build:
       dockerfile: Dockerfile.dev
       context: ./server
@@ -42,5 +43,12 @@ services:
       - /app_node_modules
       - ./worker:/app
       
-      
+
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3050:80'
     
