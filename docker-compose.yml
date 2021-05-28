@@ -28,6 +28,7 @@ services:
       - PGPORT=5432
       
   client:
+    stdin_open: true
     build:
       dockerfile: Dockerfile.dev
       context: ./client
@@ -42,7 +43,9 @@ services:
     volumes:
       - /app_node_modules
       - ./worker:/app
-      
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379  
 
   nginx:
     restart: always
