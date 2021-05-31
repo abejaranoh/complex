@@ -8,11 +8,11 @@ before_install:
 script:
   - docker run alexbh/multi-test npm test -- --coverage
 
-after_sucess:
-  - docker build -t alexbh/multi-client ./client
-  - docker built -t alexbh/multi-nginx ./nginx
-  - docker build -t alexbh/multi-server ./server
-  - docker build -t alexbh/multi-worker ./worker
+#after_sucess:
+#  - docker build -t alexbh/multi-client ./client
+#  - docker built -t alexbh/multi-nginx ./nginx
+#  - docker build -t alexbh/multi-server ./server
+#  - docker build -t alexbh/multi-worker ./worker
 
 
 
