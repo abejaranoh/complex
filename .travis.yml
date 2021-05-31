@@ -1,0 +1,31 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t alexbh/multi-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run alexbh/multi-test npm test -- --coverage
+
+after_sucess:
+  - docker build -t alexbh/multi-client ./client
+  - docker built -t alexbh/multi-nginx ./nginx
+  - docker build -t alexbh/multi-server ./server
+  - docker build -t alexbh/multi-worker ./worker
+
+
+
+#deploy:
+#  provider: elasticbeanstalk
+#  region: eu-central-1
+#  app: "docker-react"
+#  env: "Dockerreact-env"
+#  bucket_name: "elasticbeanstalk-eu-central-1-980102374197"
+#  bucket_path: "docker-react"
+#  on:
+#    branch: main
+#  access_key_id: $AWS_ACCESS_KEY
+#  secret_access_key: $AWS_SECRET_KEY
+  
+   
