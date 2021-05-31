@@ -10,11 +10,11 @@ script:
 
 after_sucess:
   - docker build -t alexbh/multi-client ./client
-  - docker built -t alexbh/multi-nginx ./nginx
+  - docker build -t alexbh/multi-nginx ./nginx
   - docker build -t alexbh/multi-server ./server
   - docker build -t alexbh/multi-worker ./worker
 
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_ID" --password-stdin
 
   - docker push alexbh/multi-client
   - docker push alexbh/multi-nginx
