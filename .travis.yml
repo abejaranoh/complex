@@ -8,11 +8,19 @@ before_install:
 script:
   - docker run -e CI=true alexbh/multi-test npm test
 
-#after_sucess:
-#  - docker build -t alexbh/multi-client ./client
-#  - docker built -t alexbh/multi-nginx ./nginx
-#  - docker build -t alexbh/multi-server ./server
-#  - docker build -t alexbh/multi-worker ./worker
+after_sucess:
+  - docker build -t alexbh/multi-client ./client
+  - docker built -t alexbh/multi-nginx ./nginx
+  - docker build -t alexbh/multi-server ./server
+  - docker build -t alexbh/multi-worker ./worker
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push alexbh/multi-client
+  - docker push alexbh/multi-nginx
+  - docker push alexbh/multi-server
+  - docker push alexbh/multi-worker
+
 
 
 
